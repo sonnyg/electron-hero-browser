@@ -1,0 +1,11 @@
+{
+  "name": "hero-browser",
+  "repository": "https://github.com/sonnyg/electron-hero-browser.git",
+  "license": "MIT",
+  "version": "0.1.0",
+  "main": "main.js",
+  "dependencies": {
+    "dotenv": "^2.0.0",
+    "md5": "^2.1.0"
+  }
+}
