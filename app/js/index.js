@@ -21,6 +21,7 @@ if (process.env.MARVEL_PUBLIC_KEY && process.env.MARVEL_PRIVATE_KEY) {
     </div>
     `;
 
+logError(new Error("testing"));
   fetch(url)
     .then(resp => resp.json())
     .then(json => json.data.results)
@@ -34,8 +35,14 @@ if (process.env.MARVEL_PUBLIC_KEY && process.env.MARVEL_PRIVATE_KEY) {
       });
     })
     .catch((error) => {
-      console.error(error);
+      logError(error);
     });
 } else {
-  console.error("Unable to access marvel.com. Environment variables 'MARVEL_PUBLIC_KEY' and 'MARVEL_PRIVATE_KEY' have not been set.")
+  logError(new Error("Unable to access marvel.com. Environment variables 'MARVEL_PUBLIC_KEY' and 'MARVEL_PRIVATE_KEY' have not been set."));
+}
+
+function logError(error) {
+  console.error(error);
+  var errorList = document.getElementById("error_list");
+  error_list.innerHTML = `<i>${error.message}</i>`;
 }
