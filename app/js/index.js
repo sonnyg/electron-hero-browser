@@ -1,8 +1,9 @@
 'use strict';
 
-// the warning message is not terribly helpful if the file is missing
-require('dotenv').config({silent: true});
-
+// the path needs to be explicitly defined when running as a packaged app
+const path = require('path');
+const envPath = path.resolve(__dirname, '..', '.env');
+require('dotenv').config({silent: true, path: envPath});
 
 if (process.env.MARVEL_PUBLIC_KEY && process.env.MARVEL_PRIVATE_KEY) {
   var md5 = require('md5');
@@ -21,7 +22,6 @@ if (process.env.MARVEL_PUBLIC_KEY && process.env.MARVEL_PRIVATE_KEY) {
     </div>
     `;
 
-logError(new Error("testing"));
   fetch(url)
     .then(resp => resp.json())
     .then(json => json.data.results)
@@ -44,5 +44,5 @@ logError(new Error("testing"));
 function logError(error) {
   console.error(error);
   var errorList = document.getElementById("error_list");
-  error_list.innerHTML = `<i>${error.message}</i>`;
+  error_list.innerHTML += `<i>${error.message}</i></br>`;
 }
